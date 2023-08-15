@@ -46,24 +46,29 @@ const handleExtraSpaces =()=>{
       <div className='container' style={{color : props.mode ==='dark'? 'white':'#1a426e'}}>
         <h1>Enter any text </h1>
         <div className="mb-3">
-          <textarea className="form-control" id="exampleFormControlTextarea1" value={text} onChange={handelOnChange} style={{backgroundColor : props.mode ==='dark'? 'grey':'white',color : props.mode ==='dark'? 'white':'#1a426e'}}  rows="8"></textarea>
+          <textarea className="form-control" id="exampleFormControlTextarea1" value={text} onChange={handelOnChange} style={{backgroundColor : props.mode ==='dark'? '#403467':'white',color : props.mode ==='dark'? 'white':'#1a426e'}}  rows="8"></textarea>
         </div>
-        <button className="btn btn-primary mx-3 my-2" onClick={upperCase}>ConverToUpper</button>
+        <button  disabled={text.length===0} className="btn btn-primary mx-3 my-2" onClick={upperCase}>ConverToUpper</button>
 
-        <button className="btn btn-primary mx-3 my-2" onClick={lowerCase}>ConverToLower</button>
+        <button disabled={text.length===0}  className="btn btn-primary mx-3 my-2" onClick={lowerCase}>ConverToLower</button>
 
-        <button className="btn btn-primary mx-3 my-2" onClick={ClearText}>Clear Text</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-3 my-2" onClick={ClearText}>Clear Text</button>
 
-        <button className="btn btn-primary mx-3 my-2" onClick={copyText}>Copy Text</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-3 my-2" onClick={copyText}>Copy Text</button>
 
-        <button className="btn btn-primary mx-3 my-2" onClick={handleExtraSpaces}> Remove space </button>
+        <button disabled={text.length===0} className="btn btn-primary mx-3 my-2" onClick={handleExtraSpaces}> Remove space </button>
 
       </div>
 
       <div className="container" style={{color : props.mode ==='dark'? 'white':'#1a426e'}}>
         <h1>Your text summary </h1>
-        <p>{text.split(" ").length}Word and {text.length} Character </p>
-        <p>{0.0008 * text.split(" ").length}Miniute Read</p>
+        <p>{text.split(" ").filter((element)=>{
+          return element.length!==0
+
+        }).length}Word and {text.length} Character </p>
+        <p>{0.0008 * text.split(" ").filter((element)=>{
+          return element.length!==0
+        }).length}Miniute Read</p>
         <h2>Preview</h2>
         <p>{text.length>0 ? text : 'Enter the text above'}</p>
       </div>
